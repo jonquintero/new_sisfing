@@ -32,9 +32,9 @@ class DependenciesController extends Controller
 
     public function store(CreateDependenciesRequest $request)
     {
-        $request->createUser();
+        $request->createDependency();
 
-        return redirect()->route('users.index');
+        return redirect()->route('dependencies.index');
     }
 
     public function edit(Dependencies $dependency)
@@ -53,9 +53,9 @@ class DependenciesController extends Controller
         return redirect()->route('users.show', ['user' => $user]);
     }
 
-    function destroy(User $user)
+    function destroy(Dependencies $dependency)
     {
-        $user->delete();
+        $dependency->delete();
 
         return redirect()->route('users.index');
     }

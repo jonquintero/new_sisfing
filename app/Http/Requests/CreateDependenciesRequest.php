@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Dependencies;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateDependenciesRequest extends FormRequest
@@ -13,7 +14,7 @@ class CreateDependenciesRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,27 @@ class CreateDependenciesRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
         ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'El campo nombre es obligatorio'
+        ];
+    }
+
+    public function createDependency()
+    {
+        $dependency = new Dependencies();
+
+        $dependency->forceFill([
+            'name' => $this->name,
+        ]);
+
+        $dependency->save();
+
+
     }
 }

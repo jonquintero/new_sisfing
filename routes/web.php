@@ -30,7 +30,13 @@ Route::middleware(['auth'])->group(function (){
     Route::get('/dependencias', 'DependenciesController@index')
         ->name('dependencies.index');
     Route::get('/dependencias/nuevo', 'DependenciesController@create')->name('dependencies.create');
-    Route::post('/dependencias', 'DependenciesControlle@store');
+    Route::post('/dependencias', 'DependenciesController@store');
+    Route::delete('/dependencias/{dependency}', 'DependenciesController@destroy')->name('dependencies.destroy');
+    Route::get('/dependencias/{dependency}', 'DependenciesController@show')
+        ->where('dependency', '[0-9]+')
+        ->name('dependencies.show');
+    Route::get('/dependencias/{dependency}/editar', 'DependenciesController@edit')->name('dependencies.edit');
+
 
 
 });
